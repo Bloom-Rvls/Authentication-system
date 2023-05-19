@@ -1,0 +1,17 @@
+{
+    "name": "bloom/auth",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bloom rvls",
+            "email": "angelicaravelonjohanison@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "^6.2"
+    }
+}
