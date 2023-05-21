@@ -20,6 +20,12 @@ $users = $pdo->query("SELECT * FROM users")->fetchAll();
 <body class="p-4">
     <h1>Acceder aux pages</h1>
 
+    <?php if(isset($_GET['login'])): ?>
+        <div class="alert alert-success">
+            vous etes bien identifier
+        </div>
+    <?php endif; ?>
+
     <ul>
         <li><a href="admin.php">Page réservée à l'administrateur</a></li>
         <li><a href="user.php">Page réservée à l'utilisateur</a></li>
