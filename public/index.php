@@ -1,11 +1,17 @@
 
 <?php
+require "../vendor/autoload.php";
+use App\Auth;
+
 $pdo = new PDO("mysql:host=localhost:3306;dbname=user_db;charset=utf8","root","", [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 
 $users = $pdo->query("SELECT * FROM users")->fetchAll();
+
+$auth = new Auth($pdo);
+$user = $auth->user();
 
 ?>
 <!DOCTYPE html>
@@ -24,6 +30,10 @@ $users = $pdo->query("SELECT * FROM users")->fetchAll();
         <div class="alert alert-success">
             vous etes bien identifier
         </div>
+    <?php endif; ?>
+
+    <?php  if ($user): ?>
+        Vous êtes connecté en tant que <?= $user->username?>
     <?php endif; ?>
 
     <ul>

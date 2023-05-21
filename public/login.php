@@ -5,14 +5,21 @@ use App\Auth;
 
 session_start();
 
+$pdo = new PDO("mysql:host=localhost:3306;dbname=user_db;charset=utf8","root","", [
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+]);
+
+$auth = new Auth($pdo);
+
+if($auth->user() !== null) {
+    header('Location: index.php');
+    exit();
+}
+
 $error = false;
+
 if(!empty($_POST)) {
-    $pdo = new PDO("mysql:host=localhost:3306;dbname=user_db;charset=utf8","root","", [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-    
-    $auth = new Auth($pdo);
     $user = $auth->login($_POST['username'], $_POST['password']);
     if ($user) {
         header('Location: index.php?login=1');
