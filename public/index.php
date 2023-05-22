@@ -33,12 +33,12 @@ $user = $auth->user();
     <?php endif; ?>
 
     <?php  if ($user): ?>
-        Vous êtes connecté en tant que <?= $user->username?>
+        Vous êtes connecté en tant que <?= $user->username?> - <a href="logout.php" style="text-decoration: none;">Se decconecter</a>
     <?php endif; ?>
 
     <ul>
-        <li><a href="admin.php">Page réservée à l'administrateur</a></li>
-        <li><a href="user.php">Page réservée à l'utilisateur</a></li>
+        <li><a href="admin.php" style="text-decoration: none;">Page réservée à l'administrateur</a></li>
+        <li><a href="user.php" style="text-decoration: none;">Page réservée à l'utilisateur</a></li>
     </ul>
 
     <table class="table table-striped">
