@@ -1,17 +1,13 @@
 
 <?php
 require "../vendor/autoload.php";
+
+use App\App;
 use App\Auth;
 
-$pdo = new PDO("mysql:host=localhost:3306;dbname=user_db;charset=utf8","root","", [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$users = App::getPDO()->query("SELECT * FROM users")->fetchAll();
 
-$users = $pdo->query("SELECT * FROM users")->fetchAll();
-
-$auth = new Auth($pdo);
-$user = $auth->user();
+$auth = App::getAuth()->user();
 
 ?>
 <!DOCTYPE html>
@@ -32,8 +28,8 @@ $user = $auth->user();
         </div>
     <?php endif; ?>
 
-    <?php  if ($user): ?>
-        Vous êtes connecté en tant que <?= $user->username?> - <a href="logout.php" style="text-decoration: none;">Se decconecter</a>
+    <?php  if ($auth): ?>
+        Vous êtes connecté en tant que <?= $auth->username?> - <a href="logout.php" style="text-decoration: none;">Se decconecter</a>
     <?php endif; ?>
 
     <ul>

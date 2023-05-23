@@ -25,7 +25,7 @@ class App {
     public static function getAuth(): Auth
     {
         if(!self::$auth) {
-            self::$auth = new Auth(self::getPDO());
+            self::$auth = new Auth(self::getPDO(), '/login.php');
         }
         
         return self::$auth;

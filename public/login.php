@@ -1,21 +1,17 @@
 <?php
 require '../vendor/autoload.php';
 
+use App\App;
 use App\Auth;
 
 session_start();
 
-$pdo = new PDO("mysql:host=localhost:3306;dbname=user_db;charset=utf8","root","", [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$auth = App::getAuth();
 
-$auth = new Auth($pdo);
-
-if($auth->user() !== null) {
+/*if($auth->user() !== null) {
     header('Location: index.php');
     exit();
-}
+}*/
 
 $error = false;
 
@@ -46,6 +42,12 @@ if(!empty($_POST)) {
     <?php if($error): ?>
         <div class="alert alert-danger">
             Identifiant ou mot de passe incorrect
+        </div>
+    <?php endif; ?>
+
+    <?php if(isset($_GET['forbid'])): ?>
+        <div class="alert alert-danger">
+            l'acces à la page est interdit
         </div>
     <?php endif; ?>
 
